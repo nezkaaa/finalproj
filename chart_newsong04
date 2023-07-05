@@ -1,0 +1,133 @@
+import pandas as pd
+import numpy as np
+
+filename='dataset.csv'
+newsong=pd.read_csv(filename)
+
+song = newsong[~newsong.duplicated(subset='track_name')].copy()
+song.dropna(inplace=True)
+
+song
+
+#Normalize Data
+from sklearn.preprocessing import MinMaxScaler
+scaler = MinMaxScaler()
+
+
+labels = ['duration_ms', 'danceability', 'energy', 'loudness', 'speechiness', 'acousticness',
+       'instrumentalness', 'liveness', 'valence', 'tempo']
+
+normalized_test =scaler.fit_transform(song[labels])
+
+normalized_df = pd.DataFrame(normalized_test, columns=labels)
+
+# Replace the original columns with the normalized columns in the DataFrame
+song[labels] = normalized_df
+
+# Print the DataFrame with the original columns
+
+song.dropna(inplace=True)
+
+# Assuming you have a DataFrame named 'song' with existing columns 'column1', 'column2', 'column3', and 'column4'
+
+# Step 1: Generate correlated random numbers
+n = len(song)  # Number of rows in the DataFrame
+correlation_dict_O={'acousticness': -0.281, 'danceability': -0.014, 'duration_ms': 0.149, 'energy':0.263,'liveness': 0.147,'loudness':0.139,'speechiness': 0.121,'tempo':0.086, 'valence':0.058}
+correlation_dict_C={'acousticness': -0.001, 'danceability': -0.06, 'duration_ms': -0.045, 'energy':0.011,'liveness': 0.057,'loudness':0.029,'speechiness': -0.009,'tempo':0.004, 'valence':0.011}
+correlation_dict_E={'acousticness': -0.019, 'danceability': -0.021, 'duration_ms': -0.056, 'energy':0.038,'liveness': 0.02,'loudness':0.056,'speechiness': -0.088,'tempo':0.01, 'valence':-0.115}
+correlation_dict_A={'acousticness': -0.083, 'danceability': -0.081, 'duration_ms': -0.023, 'energy':0.073,'liveness': 0.079,'loudness':0.063,'speechiness': 0.046,'tempo':-0.052, 'valence':-0.012}
+correlation_dict_N={'acousticness': 0.06, 'danceability': 0.069, 'duration_ms': 0.017, 'energy':-0.066,'liveness': -0.019,'loudness':-0.063,'speechiness': 0.01,'tempo':-0.013, 'valence':0.035}
+
+#OPENNESS
+
+# Calculate the scaling factors based on the standard deviation
+scaling_factors = {}
+for column, correlation in correlation_dict_O.items():
+    scaling_factors[column] = correlation
+
+# Generate random numbers and scale them
+random_numbers = np.random.normal(size=(n, len(correlation_dict_O)))
+correlated_numbers = np.sum(random_numbers * list(scaling_factors.values()), axis=1)
+
+# Min-Max scaling
+min_value = correlated_numbers.min()
+max_value = correlated_numbers.max()
+scaled_numbers = (correlated_numbers - min_value) / (max_value - min_value)
+
+# Step 2: Add the new column to the DataFrame
+song.loc[:, 'Openness'] = scaled_numbers
+
+#CONSCIOUSNESS
+
+scaling_factors = {}
+for column, correlation in correlation_dict_C.items():
+    scaling_factors[column] = correlation
+
+# Generate random numbers and scale them
+random_numbers = np.random.normal(size=(n, len(correlation_dict_C)))
+correlated_numbers = np.sum(random_numbers * list(scaling_factors.values()), axis=1)
+
+# Min-Max scaling
+min_value = correlated_numbers.min()
+max_value = correlated_numbers.max()
+scaled_numbers = (correlated_numbers - min_value) / (max_value - min_value)
+
+# Step 2: Add the new column to the DataFrame
+song.loc[:, 'Consciousness'] = scaled_numbers
+
+#EXTRAVERSION
+
+scaling_factors = {}
+for column, correlation in correlation_dict_E.items():
+    scaling_factors[column] = correlation
+
+# Generate random numbers and scale them
+random_numbers = np.random.normal(size=(n, len(correlation_dict_E)))
+correlated_numbers = np.sum(random_numbers * list(scaling_factors.values()), axis=1)
+
+# Min-Max scaling
+min_value = correlated_numbers.min()
+max_value = correlated_numbers.max()
+scaled_numbers = (correlated_numbers - min_value) / (max_value - min_value)
+
+# Step 2: Add the new column to the DataFrame
+song.loc[:, 'Extraversion'] = scaled_numbers
+
+#AGREEABLENESS
+
+scaling_factors = {}
+for column, correlation in correlation_dict_A.items():
+    scaling_factors[column] = correlation
+
+# Generate random numbers and scale them
+random_numbers = np.random.normal(size=(n, len(correlation_dict_A)))
+correlated_numbers = np.sum(random_numbers * list(scaling_factors.values()), axis=1)
+
+# Min-Max scaling
+min_value = correlated_numbers.min()
+max_value = correlated_numbers.max()
+scaled_numbers = (correlated_numbers - min_value) / (max_value - min_value)
+
+# Step 2: Add the new column to the DataFrame
+song.loc[:, 'Agreeableness'] = scaled_numbers
+
+#NEUROTICISM
+
+scaling_factors = {}
+for column, correlation in correlation_dict_N.items():
+    scaling_factors[column] = correlation
+
+# Generate random numbers and scale them
+random_numbers = np.random.normal(size=(n, len(correlation_dict_N)))
+correlated_numbers = np.sum(random_numbers * list(scaling_factors.values()), axis=1)
+
+# Min-Max scaling
+min_value = correlated_numbers.min()
+max_value = correlated_numbers.max()
+scaled_numbers = (correlated_numbers - min_value) / (max_value - min_value)
+
+# Step 2: Add the new column to the DataFrame
+song.loc[:, 'Neuroticism'] = scaled_numbers
+
+# Print the updated DataFrame
+song
