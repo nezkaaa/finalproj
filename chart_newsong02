@@ -11,11 +11,11 @@ song.dropna(inplace=True)
 
 # Step 1: Generate correlated random numbers
 n = len(song)  # Number of rows in the DataFrame
-correlation_dict_O={'acousticness': 0.297, 'danceability': 0.215, 'duration_ms': 0.205, 'energy':0.281,'instrumentalness':0.182,'liveness': -0.018,'loudness':0.269,'speechiness': 0.023,'tempo':-0.051, 'valence':0.172}
-correlation_dict_C={'acousticness': -0.024, 'danceability': -0.049, 'duration_ms': -0.058, 'energy':-0.038,'instrumentalness':-0.035,'liveness': -0.036,'loudness':-0.023,'speechiness': -0.072,'tempo':-0.024, 'valence':-0.018}
-correlation_dict_E={'acousticness': -0.03, 'danceability': 0.011, 'duration_ms': -0.072, 'energy':-0.076,'instrumentalness':-0.079,'liveness': -0.018,'loudness':-0.09,'speechiness': 0.06,'tempo':-0.035, 'valence':-0.016}
-correlation_dict_A={'acousticness': 0.067, 'danceability': -0.041, 'duration_ms': -0.07, 'energy':0.037,'instrumentalness':-0.063,'liveness': -0.085,'loudness':-0.008,'speechiness': -0.033,'tempo':0.035, 'valence':-0.003}
-correlation_dict_N={'acousticness': -0.026, 'danceability': -0.029, 'duration_ms': 0.005, 'energy':-0.007,'instrumentalness':0.001,'liveness': 0.007,'loudness':-0.016,'speechiness': -0.043,'tempo':-0.009, 'valence':0.007}
+correlation_dict_O={'acousticness': 0.284, 'danceability': 0.007, 'duration_ms': 0.106, 'energy':-0.283,'instrumentalness':0.186,'liveness': -0.104,'loudness':-0.313,'speechiness': -0.079,'tempo':-0.22, 'valence':-0.065}
+correlation_dict_C={'acousticness': 0.003, 'danceability': 0.03, 'duration_ms': 0.013, 'energy':-0.012,'instrumentalness':-0.035,'liveness': -0.048,'loudness':-0.005,'speechiness': -0.051,'tempo':-0.029, 'valence':0.008}
+correlation_dict_E={'acousticness': 0.014, 'danceability': 0.13, 'duration_ms': -0.074, 'energy':-0.016,'instrumentalness':-0.079,'liveness': -0.014,'loudness':0.03,'speechiness': 0.05,'tempo':-0.027, 'valence':0.111}
+correlation_dict_A={'acousticness': 0.082, 'danceability': 0.051, 'duration_ms': -0.07, 'energy':-0.076,'instrumentalness':-0.078,'liveness': -0.096,'loudness':-0.009,'speechiness': -0.074,'tempo':0.006, 'valence':0.031}
+correlation_dict_N={'acousticness': -0.057, 'danceability': 0.073, 'duration_ms': -0.027, 'energy':0.051,'instrumentalness':0.011,'liveness': 0.025,'loudness':0.04,'speechiness': -0.017,'tempo':0.049, 'valence':-0.045}
 
 #OPENNESS
 
