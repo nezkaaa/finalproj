@@ -1,0 +1,13 @@
+average_characteristic = df.groupby('track_genre')['characteristic'].mean() #change 'characteristic' to specific song characteristic before using code
+
+plt.style.use('ggplot')
+
+plt.bar(average_characteristic.index, average_characteristic.values)
+
+plt.title('Average Song Characteristic by Genre')
+plt.xlabel('Genre')
+plt.ylabel('Average Characteristic')
+
+plt.xticks(rotation=45)
+
+plt.show()
