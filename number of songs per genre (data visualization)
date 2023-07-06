@@ -1,0 +1,14 @@
+!pip install pandas 
+import pandas as pd
+import matplotlib.pyplot as plt
+df = pd.read_csv("dataset.csv")
+
+genre_counts = df['track_genre'].value_counts()
+
+plt.style.use('ggplot')
+
+plt.pie(genre_counts.values, labels=genre_counts.index, autopct='%1.1f%%')
+
+plt.title('Song Counts by Genre')
+
+plt.show()
