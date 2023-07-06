@@ -1,3 +1,8 @@
+!pip install pandas 
+import pandas as pd
+import matplotlib.pyplot as plt
+df = pd.read_csv("dataset.csv")
+
 average_characteristic = df.groupby('track_genre')['characteristic'].mean() #change 'characteristic' to specific song characteristic before using code
 
 plt.style.use('ggplot')
