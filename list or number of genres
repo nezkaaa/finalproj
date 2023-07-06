@@ -1,0 +1,16 @@
+#list of genres
+
+list_of_genres = df['track_genre'].unique()
+print(list_of_genres)
+
+#number of genres
+
+number_of_genres = df['track_genre'].nunique()
+print(number_of_genres)
+
+#song counts (accuracy not sure)
+
+song_counts = df['track_genre'].value_counts()
+print(song_counts)
+
+pd.set_option('display.max_rows', None)
