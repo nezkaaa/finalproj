@@ -109,9 +109,9 @@ newsong['Number'] = range(1, len(newsong) + 1)
 
 song=pd.merge(newsong,big_five_personality_test(),on='Number')
 
-song = newsong[~newsong.duplicated(subset='track_name')].copy()
+song = song[~song.duplicated(subset='track_name')].copy()
 song.dropna(inplace=True)
 
-return(song)
+song
 
 
