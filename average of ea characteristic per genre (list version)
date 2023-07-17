@@ -1,0 +1,8 @@
+#average of ea characteristic per genre
+#manually inputting each characteristic is needed
+
+characteristics = "acousticness"
+average_characteristic = df.groupby('track_genre')[characteristics].mean()
+print(average_characteristic)
+pd.set_option('display.max_rows', None)
+

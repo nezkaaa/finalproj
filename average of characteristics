@@ -1,0 +1,25 @@
+#data visualization
+
+import pandas as pd
+import matplotlib.pyplot as plt
+df = pd.read_csv("dataset.csv") 
+
+characteristics = ['acousticness','energy','key','loudness','mode','speechiness','instrumentalness','liveness','valence','danceability','time_signature']
+average_characteristic = df[characteristics].mean()
+
+plt.bar(average_characteristic.index, average_characteristic.values)
+
+plt.title('Average Values of Song Characteristics')
+plt.xlabel('Characteristic')
+plt.ylabel('Average Value')
+
+plt.xticks(rotation=45)
+
+plt.show()
+
+#list version
+
+characteristics = ['acousticness','energy','key','loudness','mode','speechiness','instrumentalness','liveness','valence','tempo','popularity','duration_ms','danceability','time_signature']
+average_characteristic = df[characteristics].mean()
+print(average_characteristic)
+pd.set_option('display.max_rows', None)

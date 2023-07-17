@@ -1,0 +1,117 @@
+# Simulated OCEAN SCORES HERE
+# This will take super long to load since it already randomizes agad 114,000 songs
+
+import pandas as pd
+import random
+def big_five_personality_test():
+    questions = {
+        "Openness": [
+            "I am someone who is always full of new ideas.",
+            "I am quick to understand new things.",
+            "I have high appreciation for art, culture, and literature.",
+            "I am interested in abstract ideas.",
+            "I am imaginative and creative."
+        ],
+        "Conscientiousness": [
+            "I am organized and pay attention to details.",
+            "I am diligent and complete tasks on time.",
+            "I am reliable.",
+            "I am NOT spontaneous.",
+            "I am careful and cautious."
+        ],
+        "Extraversion": [
+            "I am outgoing and sociable.",
+            "I am talkative.",
+            "I am energetic and enthusiastic.",
+            "I take charge of projects and exhibit good leadership skills.",
+            "I am not afraid of speaking in front of crowds."
+        ],
+        "Agreeableness": [
+            "I am considerate and kind to others.",
+            "I am competitive and like to win.",
+            "I am cooperative and easy to get along with.",
+            "I am respectful and not judgmental.",
+            "I trust people easily."
+        ],
+        "Neuroticism": [
+            "I get stressed out easily.",
+            "I am anxious and worry a lot.",
+            "I get nervous easily.",
+            "I often have negative thoughts.",
+            "I am moody and experience frequent mood swings."
+        ]
+    }
+    
+    final = pd.DataFrame()
+    
+    for _ in range(114000):
+
+        scores = {
+            "Openness": 0,
+            "Conscientiousness": 0,
+            "Extraversion": 0,
+            "Agreeableness": 0,
+            "Neuroticism": 0
+        }
+        result={}
+        #print("Welcome to the Big Five Personality Test!")
+        #print("Please rate each statement on a scale of 1 to 5, where 1 is strongly disagree and 5 is strongly agree.")
+
+        
+        
+        for trait, trait_questions in questions.items():
+            #print("\nTrait:", trait)
+            for i, question in enumerate(trait_questions):
+                #print("Question", i + 1, ":", question)
+                while True:
+                    try:
+                        answer = random.randint(1, 5)
+                        if answer < 1 or answer > 5:
+                            raise ValueError
+                        break
+                    except ValueError:
+                        #print("Invalid input. Please enter a number between 1 and 5.")
+                        next
+
+                scores[trait] += answer
+
+        #print("\nResults:")
+        for trait, score in scores.items():
+            max_score = 25
+            percentage = convert_to_percentage(score, max_score)
+            #print(f"{trait}: {percentage}")
+            result[trait]=percentage
+
+        sim = pd.DataFrame([result])
+        sim.index = sim.index.rename('Index').map(lambda x: x)
+        final = pd.concat([final, sim])
+
+    final.reset_index(drop=True, inplace=True)
+    final['Number'] = range(1, len(final) + 1)
+    return(final)
+
+def convert_to_percentage(score, max_score):
+    """Converts a score to a percentage based on the given range."""
+    percentage = (score) / (max_score)*100
+    decimal = percentage/100
+    return decimal
+
+big_five_personality_test()
+
+
+# Housekeeping and Data Clean-up
+# This portion merges the song data and the simulated OCEAN scores together. This will take a long time since it's a lot to merge :'D
+
+filename='dataset.csv'
+newsong=pd.read_csv(filename)
+
+newsong['Number'] = range(1, len(newsong) + 1)
+
+song=pd.merge(newsong,big_five_personality_test(),on='Number')
+
+song = song[~song.duplicated(subset='track_name')].copy()
+song.dropna(inplace=True)
+
+song
+
+
